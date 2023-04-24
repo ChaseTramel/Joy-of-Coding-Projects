@@ -11,7 +11,7 @@ increasedTotal = 0
 ## Thus, I have included error handling as follows.
 
 for i in range(scope):
-    currentGrade = int(input("Please enter a grade: "))
+    currentGrade = float(input("Please enter a grade: "))
     if currentGrade >= 100:
         currentGrade = 100
     gradeList.append(currentGrade)

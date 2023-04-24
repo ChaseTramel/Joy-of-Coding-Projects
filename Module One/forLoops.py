@@ -17,7 +17,6 @@ print()
 for i in range(-10, 2, 2):
     print(i, end=" ")
 print()
-print()
 
 for i in range(4):
     for j in range(4):

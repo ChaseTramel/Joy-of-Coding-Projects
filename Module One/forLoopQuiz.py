@@ -28,4 +28,3 @@ for m in "HALLELUJAH!":
         print(m, end = "")
     else:
         print(m, end = "--")
-print("\n \n")
