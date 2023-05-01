@@ -1,9 +1,6 @@
 # A program to that takes in a temperature and outputs suggestions for what the user should wear
 # Chase Tramel aka Kasey Chase Littlepaws - https://github.com/ChaseLittlepaws
 
-temp = 0
-
-
 def suggestion(temp):
     if temp > 90:
         return "Whoa, it’s boiling!"

@@ -5,10 +5,18 @@
 import turtle
 turtle.color("blue")
 
-size = 100
 # Repeat 3 times
-for i in range(3):
-    turtle.forward(size)
-    turtle.left(120)
+def triangle(size):
+    for i in range(4):
+        turtle.forward(size)
+        turtle.left(90)
+    turtle.penup()
+    turtle.backward(size)
+    turtle.pendown()
+    return
+
+triangle(100)
+triangle(50)
+triangle(25)
 
 turtle.Screen().exitonclick()
