@@ -6,4 +6,4 @@ def pyramid(symbol, number):
         print(symbol * (i + 1))
     return
 
-pyramid("x", 10)
+pyramid("^", 40)
