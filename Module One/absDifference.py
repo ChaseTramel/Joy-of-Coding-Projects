@@ -1,5 +1,5 @@
 # A python program that takes two numbers and returns their absolute difference
-# # Chase Tramel aka Kasey Chase Littlepaws - https://github.com/ChaseLittlepaws
+# Chase Tramel aka Kasey Chase Littlepaws - https://github.com/ChaseLittlepaws
 
 def absDifference(x, y):
     if (x == y):
