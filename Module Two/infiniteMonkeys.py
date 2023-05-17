@@ -14,7 +14,7 @@ def generateGuess(length):
             testList[i] = random.choice(letters) # if correctGuess has a no correct letter, guess one
         else:
             testList[i] = correctGuess[i]  # otherwise, if correctGuess has a correct letter, use that correct letter
-    print("".join(testList))
+    print("Monkey says I'll guess this:", "".join(testList))
     return testList
 
 def compareGuess(test, goal, correctGuess):
@@ -24,17 +24,17 @@ def compareGuess(test, goal, correctGuess):
             correctLetters += 1  #count the correct letter
             if correctGuess[j] == "": correctGuess[j] = test[j]  # if the correct guess is empty and the test list item is correct, assign the correct guess to that list
     currentScore = round(correctLetters / len(goal), 2)
-    print(str(correctLetters) + " correct letter(s)")
-    print(str(currentScore * 100) + " percent accurate")
+    print("Computer says you guessed " + str(correctLetters) + " correct letter(s).")
+    print("Computer says you're " + str(currentScore * 100) + " percent accurate.")
     trackScore(currentScore)  # use this function to update best
-    print("Correct guess equals:", "".join(correctGuess))
+    print("Monkey says I know these are right:", "".join(correctGuess))
     return correctGuess
 
 def trackScore(current):
     global best
     if current > best: best = current 
 
-quote = input("What Shakespeare quote do you want to use?") #more complex quotes will take more time
+quote = input("Computer says what Shakespeare quote do you want the monkey to guess? ") #more complex quotes will take more time
 goalList = list(quote) # init as a list of each letter
 length = len(goalList)
 
