@@ -1,5 +1,5 @@
-# A Python program that generates a random string and compares it to a goal string, usually as Shakespeare quote, thus infinite monkeys
-# The program keeps letters that are in the correct spaces, generating only randoms letters for the remaining spaces. This increased the likelihood of success each time.
+# A Python program that generates a random string and compares it to a goal string input by the user, usually as Shakespeare quote, thus infinite monkeys
+# The program keeps letters that are in the correct spaces, generating only randoms letters for the remaining spaces. This increases the likelihood of success each time.
 # Chase Tramel aka Kasey Chase Littlepaws - https://github.com/ChaseLittlepaws
 
 import string
@@ -11,6 +11,7 @@ def generateGuess(length):
     global guesses
     guesses += 1
     global correctGuess
+    print("Monkey says I know these are right:", "".join(correctGuess))
     for i in range(length):  
         if correctGuess[i] == "":
             testList[i] = random.choice(letters) # if correctGuess has a no correct letter, guess one
@@ -26,11 +27,10 @@ def compareGuess(test, goal, correctGuess, guesses):
             correctLetters += 1  #count the correct letter
             if correctGuess[j] == "": correctGuess[j] = test[j]  # if the correct guess is empty and the test list item is correct, assign the correct guess to that list
     currentScore = round(correctLetters / len(goal), 2)
-    print("Computer says you have guessed " + str(guesses) + " times.")
-    print("Computer says you guessed " + str(correctLetters) + " correct letter(s).")
-    print("Computer says you are " + str(round(currentScore * 100)) + " percent accurate.")
+    print("Computer says you guessed " + str(correctLetters) + " correct letter(s) out of " + str(len(goal)) + "." )
+    print("Computer says your guess is " + str(round(currentScore * 100)) + " percent accurate.")
+    if currentScore < 1: print("Computer says you have guessed " + str(guesses) + " times.")
     trackScore(currentScore)  # use this function to update best
-    print("Monkey says I know these are right:", "".join(correctGuess))
     return correctGuess
 
 def trackScore(current):
