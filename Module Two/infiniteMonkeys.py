@@ -6,7 +6,7 @@ import string
 import random
 
 def generateGuess(length):
-    letters = string.printable
+    letters = string.printable  #a string of all printables chars, including punctuation
     testList = [""] * length  # init testList as list of empty strings goalList long
     global correctGuess
     for i in range(length):  
@@ -23,9 +23,9 @@ def compareGuess(test, goal, correctGuess):
         if test[j] == goal[j]:  #if test list letter is correct
             correctLetters += 1  #count the correct letter
             if correctGuess[j] == "": correctGuess[j] = test[j]  # if the correct guess is empty and the test list item is correct, assign the correct guess to that list
-    currentScore = correctLetters / len(goal)  
+    currentScore = round(correctLetters / len(goal), 2)
     print(str(correctLetters) + " correct letter(s)")
-    print(str(round(currentScore * 100, 2)) + " percent accurate")
+    print(str(currentScore * 100) + " percent accurate")
     trackScore(currentScore)  # use this function to update best
     print("Correct guess equals:", "".join(correctGuess))
     return correctGuess
@@ -34,7 +34,7 @@ def trackScore(current):
     global best
     if current > best: best = current 
 
-quote = input("What Shakespeare quote do you want to use?")
+quote = input("What Shakespeare quote do you want to use?") #more complex quotes will take more time
 goalList = list(quote) # init as a list of each letter
 length = len(goalList)
 
@@ -42,7 +42,6 @@ correctGuess = ["" for _ in goalList] # init correctGuess as a list of empty str
 print(correctGuess)
 
 best = 0
-goalBest = 1 # the goal best score. this is so the IDE doesn't time out trying to get 100%
 
-while best != goalBest: 
+while best != 1: 
     correctGuess = compareGuess(generateGuess(length), goalList, correctGuess) # correct guess gets the output of compareString
