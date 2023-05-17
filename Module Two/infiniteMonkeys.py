@@ -1,5 +1,5 @@
-# A Python program that generates a random string and compares it to a goal string
-# The program also keeps letters that are in the correct spaces, generating only randoms letters for the remaining spaces
+# A Python program that generates a random string and compares it to a goal string, usually as Shakespeare quote, thus infinite monkeys
+# The program keeps letters that are in the correct spaces, generating only randoms letters for the remaining spaces. This increased the likelihood of success each time.
 # Chase Tramel aka Kasey Chase Littlepaws - https://github.com/ChaseLittlepaws
 
 import string
@@ -34,7 +34,7 @@ def trackScore(current):
     global best
     if current > best: best = current 
 
-quote = "To be, or not to be: that is the question.".casefold()
+quote = input("What Shakespeare quote do you want to use?")
 goalList = list(quote) # init as a list of each letter
 length = len(goalList)
 
