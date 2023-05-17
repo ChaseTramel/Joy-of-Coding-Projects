@@ -26,14 +26,13 @@ def compareGuess(test, goal, correctGuess):
     currentScore = correctLetters / len(goal)  
     print(str(correctLetters) + " correct letter(s)")
     print(str(round(currentScore * 100, 2)) + " percent accurate")
-    trackBestScore(currentScore)  # use this function to compare the current score to the best score ever
+    trackScore(currentScore)  # use this function to update best
     print("Correct guess equals:", "".join(correctGuess))
     return correctGuess
 
-def trackBestScore(current):
+def trackScore(current):
     global best
     if current > best: best = current 
-    print(str(round(best * 100, 2)) + " is the best score so far")
 
 
 goalList = list("methinks it is like a weasel") # to be easily changed. init as a list
