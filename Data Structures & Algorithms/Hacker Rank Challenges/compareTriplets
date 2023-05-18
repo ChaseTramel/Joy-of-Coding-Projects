@@ -1,0 +1,15 @@
+# A Python program that compares two lists with three items each.
+# Returns two 'scores for who wins in each comparision
+# Chase Tramel aka Kasey Chase Littlepaws - https://github.com/ChaseLittlepaws
+
+def compareTriplets(a, b):
+    alicePoints = 0
+    bobPoints = 0
+    i = 0
+    while i < 3:
+        if a[i] > b[i]:
+            alicePoints += 1
+        elif a[i] < b[i]:
+            bobPoints += 1
+        i += 1
+    return [alicePoints, bobPoints]
