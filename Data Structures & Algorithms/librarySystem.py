@@ -94,6 +94,17 @@ class Patron:
         self.IDNumber = (''.join(random.choices(string.digits, k=6)))
     def __str__(self):
         return f"Thank you for registering {self.name}, DOB: {self.birthday}. Their ID Number is {self.IDNumber}."
+    def payFine(self):
+        if self.IDNumber in library.fines:
+            if library.fines[self.IDNumber] > 0:
+                print(f"Thanks {self.name}, you paid your fine of ${library.fines[self.IDNumber]:.2f}.")
+                library.fines[self.IDNumber] = 0
+                print(f"Your balance is now ${library.fines[self.IDNumber]:.2f}.")
+            else:
+                print(f"{self.name}, you didn't have any fines to pay!")
+                print(f"Your balance is now ${library.fines[self.IDNumber]:.2f}.")
+        else:
+            print(f"{self.name}, you didn't have any fines to pay!")
 
 class Librarian:
     pass
@@ -156,4 +167,12 @@ print("\n")
 # Manually giving Chase fines for testing
 library.fines[chaseTramel.IDNumber] = 3
 hunterAbe.checkOut(chaseTramel.name, chaseTramel.IDNumber)
+print("\n")
+
+# Chase pays fines
+chaseTramel.payFine()
+print("\n")
+
+# Warren tries to pays fines, but doesn't have any
+warrenJones.payFine()
 print("\n")
