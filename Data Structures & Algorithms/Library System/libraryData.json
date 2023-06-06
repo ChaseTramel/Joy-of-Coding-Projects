@@ -1,0 +1,19 @@
+{
+    "books": [
+        {
+            "title": "Dracula",
+            "publishedYear": "1897",
+            "author": "Bram Stoker",
+            "dueDate": null,
+            "rentingPatron": null
+        }
+    ],
+    "patrons": [
+        {
+            "name": "Olivia Smith",
+            "birthday": "1995-04-17",
+            "IDNumber": "687382",
+            "fine": 0
+        }
+    ]
+}

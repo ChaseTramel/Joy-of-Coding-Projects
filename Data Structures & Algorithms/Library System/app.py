@@ -4,7 +4,7 @@
 import datetime
 import random
 import string
-import pickle
+import json
 from flask import Flask, render_template
 
 app = Flask(__name__)
@@ -23,23 +23,25 @@ class Library:
         self.patrons = [] # List of patron objects
     def saveData(self):
         data = {
-            'books': self.books,
-            'patrons': self.patrons
+            'books':[book.__dict__ for book in self.books],
+            'patrons':[patron.__dict__ for patron in self.patrons]
         }
-        with open("libraryFile.txt", 'wb') as file:
-            pickle.dump(data,file)
-        print("Library backed up successfully.")
+        filepath = "Data Structures & Algorithms\Library System\libraryData.json"
+        with open(filepath, "w") as file:
+            json.dump(data, file, indent=4, default=str)
+        print("Library data backed up successfully!")
     def loadData(self):
+        filepath = "Data Structures & Algorithms\Library System\libraryData.json"
         try:
-            with open("libraryFile.txt", 'rb') as file:
-                data = pickle.load(file)
-            self.books = data['books']
-            self.patrons = data['patrons']
-            print("Library data loaded successfully.")
+            with open(filepath, "r") as file:
+                data = json.load(file)
+            self.books = [Book(**book) for book in data['books']]
+            self.patrons = [Patron(**patron) for patron in data['patrons']]
+            print("Library data loaded successfully!")
         except FileNotFoundError:
-            print("Library file not found!")
-        except pickle.UnpicklingError:
-            print("Error loading library data. The file may be corrupted.")     
+            print("Library data not found. A new library file was made.")
+        except json.JSONDecodeError:
+            print("Error loading the library data. The file may be corrupted.")
     def addBook(self, book):
         if any(existingBook.title == book.title for existingBook in self.books):
             print(f"Sorry, a book with the title '{book.title}' is already in the library.")
@@ -94,15 +96,15 @@ class Library:
                 return True
         else: return False
 class Book:
-    def __init__(self, title, publishedYear, author):
+    def __init__(self, title, publishedYear, author, dueDate = None, rentingPatron = None):
         self.title = title
         self.publishedYear = publishedYear
         self.author = author
-        self.dueDate = None
-        self.rentingPatron = None
+        self.dueDate = dueDate
+        self.rentingPatron = rentingPatron
         print(f"{self.title} by {self.author}, published in {self.publishedYear}, arrived.")
     def __str__(self):
-        return f"{self.title} by {self.author}, published in {self.publishedYear}"
+        return f"{self.title} by {self.author}, published in {self.publishedYear}\nChecked out by {self.rentingPatron}"
     def checkOut(self, patron):
         if patron.fine > 0:
             print(f"Sorry {patron.name}, you can't check out {self.title} because you have a fine of ${patron.fine:.2f}")
@@ -110,10 +112,9 @@ class Book:
             print(f"Sorry {patron.name}, you can't check out {self.title} because you're not in the libary system.")
         elif self.dueDate == None:
             today = datetime.date.today()
-            self.rentingPatronName = patron.name
-            self.rentingPatronID = patron.IDNumber
+            self.rentingPatron = patron
             self.dueDate = today + datetime.timedelta(days = 14)
-            print(f"Thanks, {self.rentingPatronName} (ID Number: {self.rentingPatronID}), for checking out {self.title}. This book is due on {self.dueDate}.")
+            print(f"Thanks, {patron.name} (ID Number: {patron.IDNumber}), for checking out {self.title}. This book is due on {self.dueDate}.")
             library.saveData()
         else:
             print(f"Sorry, {patron.name}, {self.title} is checked out. It should be returned on or before {self.dueDate}.")
@@ -121,16 +122,7 @@ class Book:
         if self.dueDate is not None:
             self.calculateFine()
             self.rentingPatron = None
-            self.rentingPatronID = None
             self.dueDate = None
-            if self.fine > 0:
-                if self.rentingPatronID in library.fines:
-                    library.fines[self.rentingPatronID] += self.fine
-                else:
-                    library.fines[self.rentingPatronID] = self.fine
-                print(f"{self.title} was returned, but it was late, so you have a fine of ${library.fines[self.rentingPatronID]:.2f}.")
-            else:
-                print(f"{self.title}, was returned!")
         else:
             print(f"{self.title} can't be returned because it isn't checked out!")
         library.saveData()
@@ -148,12 +140,14 @@ class Book:
             print(f"{self.title} by {self.author}, published in {self.publishedYear}, is currently checked out and due {self.dueDate}.")
 
 class Patron:
-    def __init__(self, name, birthMonth, birthDay, birthYear):
+    def __init__(self, name, birthday, IDNumber, fine = 0):
         self.name = name
-        self.birthday = datetime.date(birthYear, birthMonth, birthDay)
-        self.IDNumber = self.generateIDNumber()
-        self.fine = 0
+        self.birthday = datetime.data(birthday)
+        self.IDNumber = IDNumber
+        self.fine = fine
         library.addPatron(self)
+        if self.IDNumber == None:
+            self.IDNumber = self.generateIDNumber()
     def generateIDNumber(self):
         while True:
             IDNumber = (''.join(random.choices(string.digits, k=6)))
@@ -177,22 +171,27 @@ class Patron:
 library = Library()
 library.loadData()
 
-hero = Book("Hero on a Mission: A Path to a Meaningful Life", "2023", "Donald Miller")
+dracula = Book("Dracula", "1897", "Bram Stoker")
+library.addBook(dracula)
 print("\n")
 
-library.addBook(hero)
-print("\n")
 
 library.displayAllBooks()
 print("\n")
 
-chase = Patron("Chase Tramel", 3, 15, 1995)
+olivia = Patron("Olivia Smith", "4-17-2000", None)
+print("\n")
+
+dracula.checkOut(olivia)
 print("\n")
 
 library.displayBooksByStatus()
 print("\n")
 
 library.displayAllPatrons()
+print("\n")
+
+print(dracula)
 print("\n")
 
 if __name__ == '__main__':
