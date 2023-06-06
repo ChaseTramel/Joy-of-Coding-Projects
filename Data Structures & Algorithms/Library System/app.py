@@ -5,6 +5,17 @@ import datetime
 import random
 import string
 import pickle
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/hello')
+def hello():
+    return 'Hello, World'
 
 class Library:
     def __init__(self):
@@ -69,14 +80,6 @@ class Library:
         print("All Patrons:")
         for patron in self.patrons:
             print(f"Patron Name: {patron.name}, Patron Date of Birth: {patron.birthday}, Patron ID: {patron.IDNumber}")
-    def displayPatronBalances(self):
-        print("Patron Fines:")
-        for patron in self.patrons:
-            if patron.IDNumber in self.fines:
-                fine = self.fines[patron.IDNumber]
-                print(f"Patron {patron.name}: ${fine:.2f}")
-            else:
-                print(f"Patron {patron.name}: $0.00")
 class Book:
     def __init__(self, title, publishedYear, author):
         self.title = title
@@ -135,31 +138,29 @@ class Patron:
         self.name = name
         self.birthday = birthday
         self.IDNumber = (''.join(random.choices(string.digits, k=6)))
+        self.fine = 0
         library.patrons.append(self)
     def __str__(self):
         return f"Thank you for registering {self.name}, DOB: {self.birthday}. Their ID Number is {self.IDNumber}."
     def payFine(self, payment):
         if self.IDNumber in library.fines:  # If the patron is in the fine dictionary
-            if library.fines[self.IDNumber] > 0:   # if the patron has fines
-                if library.fines[self.IDNumber] > 0:
-                    print(f"Thanks {self.name}, you paid your fine of ${library.fines[self.IDNumber]:.2f}.")
-                    library.fines[self.IDNumber] -= payment
-                    print(f"Your balance is now ${library.fines[self.IDNumber]:.2f}.")
-                    if library.fines[self.IDNumber] < 0:  # if Patron gave too much money
-                        change = abs(library.fines[self.IDNumber])
-                        print(f"Here is your change of ${change:.2f}")
-                        library.fines[self.IDNumber] = 0
-                        print(f"Your balance is now ${library.fines[self.IDNumber]:.2f}.")
-                else:
-                    print(f"Thanks {self.name}, you contributed towards your fine of ${library.fines[self.IDNumber]:.2f}.")
-                    library.fines[self.IDNumber] -= payment
+            if library.fines[self.IDNumber] > 0:
+                print(f"Thanks {self.name}, you paid your fine of ${library.fines[self.IDNumber]:.2f}.")
+                library.fines[self.IDNumber] -= payment
+                print(f"Your balance is now ${library.fines[self.IDNumber]:.2f}.")
+                if library.fines[self.IDNumber] < 0:  # if Patron gave too much money
+                    change = abs(library.fines[self.IDNumber])
+                    print(f"Here is your change of ${change:.2f}")
+                    library.fines[self.IDNumber] = 0
                     print(f"Your balance is now ${library.fines[self.IDNumber]:.2f}.")
             else:
-                print(f"{self.name}, you didn't have any fines to pay!")
+                print(f"Thanks {self.name}, you contributed towards your fine of ${library.fines[self.IDNumber]:.2f}.")
+                library.fines[self.IDNumber] -= payment
                 print(f"Your balance is now ${library.fines[self.IDNumber]:.2f}.")
         else:
             print(f"{self.name}, you didn't have any fines to pay!")
         library.saveData()
+
 
 
 # Initialize Library
@@ -191,3 +192,6 @@ print("\n")
 # Display all of the books in the system
 library.displayAllBooks()
 print("\n")
+
+if __name__ == '__main__':
+    app.run()
