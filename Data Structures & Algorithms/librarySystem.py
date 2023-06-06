@@ -33,9 +33,12 @@ class Library:
         except pickle.UnpicklingError:
             print("Error loading library data. The file may be corrupted.")     
     def addBook(self, book):
-        self.books.append(book)
-        print(f"{book.title} was just added to the library.")
-        self.saveData()
+        if any(existingBook.title == book.title for existingBook in self.books):
+            print(f"Sorry, a book with the title '{book.title}' is already in the library.")
+        else: 
+            self.books.append(book)
+            print(f"{book.title} was just added to the library.")
+            self.saveData()
     def removeBook(self, book):
         self.books.remove(book)
         self.saveData()
@@ -137,8 +140,8 @@ class Patron:
         return f"Thank you for registering {self.name}, DOB: {self.birthday}. Their ID Number is {self.IDNumber}."
     def payFine(self, payment):
         if self.IDNumber in library.fines:  # If the patron is in the fine dictionary
-            if library.fines[self.IDNumber] > 0:  
-                if library.fines[self.IDNumber] >= 0:
+            if library.fines[self.IDNumber] > 0:   # if the patron has fines
+                if library.fines[self.IDNumber] > 0:
                     print(f"Thanks {self.name}, you paid your fine of ${library.fines[self.IDNumber]:.2f}.")
                     library.fines[self.IDNumber] -= payment
                     print(f"Your balance is now ${library.fines[self.IDNumber]:.2f}.")
@@ -167,7 +170,7 @@ library.loadData()
 library.displayAllBooks()
 print("\n")
 
-# Display the books that are by status
+# Display the books that by status
 library.displayBooksByStatus()
 print("\n")
 
@@ -177,4 +180,14 @@ print("\n")
 
 # Display all patron balances
 library.displayPatronBalances()
+print("\n")
+
+# Add a book to the system
+hero = Book("Hero on a Mission: A Path to a Meaningful Life", "2023", "Donald Miller")
+print("\n")
+library.addBook(hero)
+print("\n")
+
+# Display all of the books in the system
+library.displayAllBooks()
 print("\n")
