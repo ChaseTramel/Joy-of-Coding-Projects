@@ -150,7 +150,7 @@ class Book:
             print(f"Sorry, {patron.name}, {self.title} is checked out. It should be returned on or before {self.dueDate}.")
     def returnBook(self):
         if self.dueDate is not None:
-            self.calculateFine()
+            # self.calculateFine()
             self.rentingPatron = None
             self.dueDate = None
         else:
@@ -234,6 +234,28 @@ def checkout():
             return "Book not found."
     else:
         return render_template("check_out.html")
+    
+@app.route("/return")
+def displayReturn():
+    return render_template("return.html")
+
+@app.route("/return", methods=["GET", "POST"])
+def processReturn():
+    if request.method == "POST":
+        bookID = request.form.get("bookID")
+        book = library.getBook(bookID)
+        if book:
+            if book.dueDate:
+                book.returnBook()
+                return "Book successfully returned"
+            else:
+                return "Book this book wasn't checked out."
+        else:
+            return "Book not found."
+    else:
+        return render_template("check_out.html")
 
 if __name__ == "__main__":
     app.run()
+
+

@@ -1,0 +1,15 @@
+<!-- templates/return.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Return A Book</title>
+</head>
+<body>
+    <h1>What Book Are You Returning?</h1>
+    <form action="{{ return }}" method="POST">
+        <label for="bookID">Book ID #</label>
+        <input type="text" id="bookID" name="bookID"><br>
+        <input type="submit" value="Return Book">
+    </form>
+</body>
+</html>
