@@ -1,19 +1,20 @@
 {
     "books": [
         {
-            "title": "Dracula",
-            "publishedYear": "1897",
-            "author": "Bram Stoker",
-            "dueDate": null,
-            "rentingPatron": null
+            "title": "Frankenstein",
+            "publishedYear": "1818",
+            "author": "Mary Shelley",
+            "dueDate": "2023-06-21",
+            "rentingPatron": "Chase Tramel",
+            "bookID": "55772265"
         }
     ],
     "patrons": [
         {
-            "name": "Olivia Smith",
-            "birthday": "1995-04-17",
-            "IDNumber": "687382",
-            "fine": 0
+            "name": "Chase Tramel",
+            "birthday": "3-13-1994",
+            "fine": 0,
+            "IDNumber": "582053"
         }
     ]
 }
