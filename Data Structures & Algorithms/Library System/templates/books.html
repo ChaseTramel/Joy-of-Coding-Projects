@@ -3,20 +3,23 @@
 <html>
 <head>
     <title>All Books</title>
+    <link rel="stylesheet" href='/static/styles/main.css' />
 </head>
 <body>
     <h1>All Books</h1>
-    <ul>
-        {% for book in books %}
-            <li>
-                Book #{{ book.bookID }}: {{ book.title }} by {{ book.author }}, published in {{ book.publishedYear }}</li>
-                {% if book.dueDate %}
-                    Currently checked out. Due on {{ book.dueDate }}
-                {% else %}
-                    You can check out this book using the Book #{{ book.bookID }}
-                {% endif %}
-            </li>
-         {% endfor %}
-    </ul>
+    <div>
+        <ul>
+            {% for book in books %}
+                <li>
+                    Book #{{ book.bookID }}: <i>{{ book.title }}</i> by {{ book.author }}, published in {{ book.publishedYear }}.
+                    {% if book.dueDate %}
+                        Currently checked out. Due on {{ book.dueDate }}
+                    {% else %}
+                        You can check out this book using the Book #{{ book.bookID }}
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>    
 </body>
 </html>
