@@ -9,10 +9,13 @@
     <p id="breadcrumb"><a href="/">Homepage</a> > All Books</p>
     <h1>All Books</h1>
     <div>
+        <p>Welcome to our comprehensive collection of books! Explore our vast web page listing that showcases a diverse range of literary treasures. Immerse yourself in a world of boundless possibilities as you peruse our extensive catalog, carefully curated to cater to every reader's taste.</p>
+    </div>
+    <div>
         <ul>
             {% for book in books %}
                 <li>
-                    <i>{{ book.title }}</i> by {{ book.author }}, published in {{ book.publishedYear }}.
+                    <i>{{ book.title }}</i> by {{ book.author }}, published in {{ book.publishedYear }}.<br>
                     {% if book.dueDate %}
                         Currently checked out. Due on {{ book.dueDate }}
                     {% else %}

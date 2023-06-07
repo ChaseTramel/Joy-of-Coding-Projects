@@ -1,24 +1,25 @@
 body {
-    background-color: #faf4ed;
-  }
-  
-  h1 {
-    color: #56949f;
-    text-align: center;
-    font-family: 'Atkinson Hyperlegible', sans-serif;
-  }
-  
-  p {
-    color: #575279;
-    text-align: left;
-    font-family: 'Atkinson Hyperlegible', sans-serif;
-    font-size: 16x;
-  }
+  background-color: #faf4ed;
+}
 
-  div {
-    margin: auto;
-    width: 500px;
-  }
+h1 {
+  color: #56949f;
+  text-align: center;
+  font-family: 'Atkinson Hyperlegible', sans-serif;
+}
+
+p {
+  color: #575279;
+  text-align: left;
+  font-family: 'Atkinson Hyperlegible', sans-serif;
+  font-size: 16x;
+}
+
+div {
+  margin: auto;
+  text-align: center;
+  width: 500px;
+}
 
 a:link {
   color: #286983;
@@ -48,23 +49,27 @@ a:hover {
 }
 
 .button:hover {
-  background-color: #ea9d34; 
+  background-color: #286983; 
   color: #fffaf3;
 }
 
 ul {
   color: #575279;
+  display: inline-block;
   text-align: left;
   font-family: 'Atkinson Hyperlegible', sans-serif;
-  font-size: px;
+  font-size: 16px;
   margin: auto;
 }
 
 li{
   list-style-type: none;
   border: 1px solid #cecacd;
-  margin: 20px 0;
+  margin: 10px 0;
   padding: 10px;
+  width: 400px;
+  display: inline-block;
+  text-align: left;
 }
 
 input {
@@ -83,7 +88,7 @@ label {
   font-size: 18x;
 }
 
-input[type=button], input[type=submit]  {
+input[type=submit]{
   background-color: #f2e9e1;
   border: none;
   color: #575279;
@@ -91,10 +96,23 @@ input[type=button], input[type=submit]  {
   text-decoration: none;
   margin: 8px 0px;
   cursor: pointer;
+  transition-duration: 0.4s;
+}
+
+input[type=submit]:hover{
+  background-color: #286983; 
+  color: #fffaf3;
 }
 
 #breadcrumb {
   color: #cecacd !important;
   text-align: center;
   font-family: 'Atkinson Hyperlegible', sans-serif;
+}
+
+#message {
+  color: #286983;
+  font-family: 'Atkinson Hyperlegible', sans-serif;
+  font-weight: bold;
+  font-size: 24x !important;
 }

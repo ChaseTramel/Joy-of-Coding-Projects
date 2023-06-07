@@ -8,6 +8,7 @@ import json
 from flask import *
 
 app = Flask(__name__)
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 class Library:
     def __init__(self):
@@ -226,12 +227,15 @@ def checkout():
         IDNumber = request.form.get('IDNumber')
         if book:
             if book.dueDate:
-                return "Book is already checked out."
+                flash("Sorry, that book is already checked out.")
+                return redirect("/")
             else:
                 book.checkOut(IDNumber)
-                return "Book checked out successfully."
+                flash("You successfully checked out a book!")
+                return redirect("/")
         else:
-            return "Book not found."
+            flash("Book not found.")
+            return redirect("/")
     else:
         return render_template("check_out.html")
     
@@ -247,11 +251,14 @@ def processReturn():
         if book:
             if book.dueDate:
                 book.returnBook()
-                return "Book successfully returned"
+                flash("You successfully returned the book!")
+                return redirect("/")
             else:
-                return "Book this book wasn't checked out."
+                flash("That books wasn't checked out")
+                return redirect("/")
         else:
-            return "Book not found."
+            flash("Book not found.")
+            return redirect("/")
     else:
         return render_template("check_out.html")
 
