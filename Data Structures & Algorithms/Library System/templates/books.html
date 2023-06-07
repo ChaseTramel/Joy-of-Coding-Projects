@@ -2,11 +2,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Titusville Library System</title>
+    <title>All Books</title>
 </head>
 <body>
-    <h1>Welcome to the Titusville Library System</h1>
-    <p>This is a placeholder books page.</p>
+    <h1>All Books</h1>
+    <ul>
+        {% for book in books %}
+            <li>
+                Book #{{ book.bookID }}: {{ book.title }} by {{ book.author }}, published in {{ book.publishedYear }}</li>
+                {% if book.dueDate %}
+                    Currently checked out. Due on {{ book.dueDate }}
+                {% else %}
+                    You can check out this book using the Book #{{ book.bookID }}
+                {% endif %}
+            </li>
+         {% endfor %}
+    </ul>
 </body>
 </html>
-

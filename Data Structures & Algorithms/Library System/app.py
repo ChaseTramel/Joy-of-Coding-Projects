@@ -5,17 +5,9 @@ import datetime
 import random
 import string
 import json
-from flask import Flask, render_template
+from flask import *
 
 app = Flask(__name__)
-
-@app.route('/')
-def index():
-    return render_template('index.html')
-
-@app.route('/hello')
-def hello():
-    return 'Hello, World'
 
 class Library:
     def __init__(self):
@@ -51,8 +43,8 @@ class Library:
             print("Error loading the library data. The file may be corrupted.")
     def addBook(self, title, pubYear, author, dueDate, rentingPatron, bookID):
         book = Book(title, pubYear, author, dueDate, rentingPatron, bookID)
-        if any(existingBook.title == book.title for existingBook in self.books):
-            print(f"Sorry, a book with the title '{book.title}' is already in the library.")
+        if any(existingBook.bookID == bookID for existingBook in self.books):
+            print(f"Sorry, a book with the ID '{book.bookID}' is already in the library.")
         else: 
             self.books.append(book)
             print(f"{book.title} was just added to the library.")
@@ -108,17 +100,15 @@ class Library:
             if book.bookID == bookID:
                 return True
         else: return False
-    def findPatron(self, IDNumber):
+    def getPatron(self, IDNumber):
         for patron in self.patrons:
             if patron.IDNumber == IDNumber:
-                print(f"{patron.name} found!")
                 return patron
         print("Patron not found.")
         return None
-    def findBook(self, bookID):
+    def getBook(self, bookID):
         for book in self.books:
             if book.bookID == bookID:
-                print(f"{book.title} found!")
                 return book
         print("Book not found")
         return None
@@ -145,7 +135,7 @@ class Book:
             if not library.bookIDExists(attemptedID):
                 return attemptedID
     def checkOut(self, IDNumber):
-        patron = library.findPatron(IDNumber)
+        patron = library.getPatron(IDNumber)
         if patron.fine > 0:
             print(f"Sorry {patron.name}, you can't check out {self.title} because you have a fine of ${patron.fine:.2f}")
         elif patron not in library.patrons:
@@ -212,17 +202,38 @@ library = Library()
 library.loadData()
 print("\n")
 
-library.addBook("Frankenstein", "1818", "Mary Shelley", None, None, None)
-print("\n")
+# Rendering
+app.debug = True
 
-Patron("Chase Tramel", "3-13-1994", None)
-print("\n")
+@app.route("/")
+def home():
+    return render_template("index.html")
 
-library.displayBooksByStatus()
-print("\n")
+@app.route("/books")
+def displayBooks():
+    books = library.books
+    return render_template("books.html", books=books)
 
-library.findBook("55772265").checkOut("582053")
+@app.route("/check_out")
+def displayCheckOutForm():
+    return render_template("check_out.html")
 
+@app.route("/check_out>", methods=["GET", "POST"])
+def checkout():
+    if request.method == "POST":
+        bookID = request.form.get("bookID")
+        book = library.getBook(bookID)
+        IDNumber = request.form.get('IDNumber')
+        if book:
+            if book.dueDate:
+                return "Book is already checked out."
+            else:
+                book.checkOut(IDNumber)
+                return "Book checked out successfully."
+        else:
+            return "Book not found."
+    else:
+        return render_template("check_out.html")
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run()
