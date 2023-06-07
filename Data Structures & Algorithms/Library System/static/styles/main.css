@@ -61,6 +61,40 @@ ul {
 }
 
 li{
-  border: #575279;
-  margin: 15px 0;
+  list-style-type: none;
+  border: 1px solid #cecacd;
+  margin: 20px 0;
+  padding: 10px;
+}
+
+input {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 2px solid #cecacd;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+label {
+  color: #575279;
+  font-family: 'Atkinson Hyperlegible', sans-serif;
+  font-size: 18x;
+}
+
+input[type=button], input[type=submit]  {
+  background-color: #f2e9e1;
+  border: none;
+  color: #575279;
+  padding: 12px 20px;
+  text-decoration: none;
+  margin: 8px 0px;
+  cursor: pointer;
+}
+
+#breadcrumb {
+  color: #cecacd !important;
+  text-align: center;
+  font-family: 'Atkinson Hyperlegible', sans-serif;
 }

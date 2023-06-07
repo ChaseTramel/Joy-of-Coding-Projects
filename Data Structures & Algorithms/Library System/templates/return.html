@@ -6,11 +6,14 @@
     <link rel="stylesheet" href='/static/styles/main.css' />
 </head>
 <body>
+    <p id="breadcrumb"><a href="/">Homepage</a> > Book Return</p>
     <h1>What Book Are You Returning?</h1>
-    <form action="{{ return }}" method="POST">
-        <label for="bookID">Book ID #</label>
-        <input type="text" id="bookID" name="bookID"><br>
-        <input type="submit" value="Return Book">
-    </form>
+    <div>
+        <form action="{{ return }}" method="POST">
+            <label for="bookID">Book ID #</label>
+            <input type="text" id="bookID" name="bookID"><br>
+            <input type="submit" value="Return Book">
+        </form>
+    </div>
 </body>
 </html>

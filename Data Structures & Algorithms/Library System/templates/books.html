@@ -6,12 +6,13 @@
     <link rel="stylesheet" href='/static/styles/main.css' />
 </head>
 <body>
+    <p id="breadcrumb"><a href="/">Homepage</a> > All Books</p>
     <h1>All Books</h1>
     <div>
         <ul>
             {% for book in books %}
                 <li>
-                    Book #{{ book.bookID }}: <i>{{ book.title }}</i> by {{ book.author }}, published in {{ book.publishedYear }}.
+                    <i>{{ book.title }}</i> by {{ book.author }}, published in {{ book.publishedYear }}.
                     {% if book.dueDate %}
                         Currently checked out. Due on {{ book.dueDate }}
                     {% else %}

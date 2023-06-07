@@ -6,13 +6,16 @@
     <link rel="stylesheet" href='/static/styles/main.css' />
 </head>
 <body>
+    <p id="breadcrumb"><a href="/">Homepage</a> > Check Out</p>
     <h1>Check Out A Book</h1>
-    <form action="{{ check_out }}" method="POST">
-        <label for="bookID">Book ID Number</label>
-        <input type="text" id="bookID" name="bookID"><br>
-        <label for="IDNumber">Your Library Number</label>
-        <input type="text" id="IDNumber" name="IDNumber"><br>
-        <input type="submit" value="Check Out">
-    </form>
+    <div>
+        <form action="{{ check_out }}" method="POST">
+            <label for="bookID">Book ID Number</label>
+            <input type="text" id="bookID" name="bookID"><br>
+            <label for="IDNumber">Your Library Number</label>
+            <input type="text" id="IDNumber" name="IDNumber"><br>
+            <input type="submit" value="Check Out">
+        </form>
+    </div>  
 </body>
 </html>
