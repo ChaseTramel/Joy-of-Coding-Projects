@@ -218,7 +218,7 @@ def displayBooks():
 def displayCheckOutForm():
     return render_template("check_out.html")
 
-@app.route("/check_out>", methods=["GET", "POST"])
+@app.route("/check_out", methods=["GET", "POST"])
 def checkout():
     if request.method == "POST":
         bookID = request.form.get("bookID")
