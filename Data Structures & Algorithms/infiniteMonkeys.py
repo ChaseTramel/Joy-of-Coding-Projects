@@ -1,6 +1,6 @@
 # A Python program that generates a random string and compares it to a goal string input by the user, usually as Shakespeare quote, thus infinite monkeys
 # The program keeps letters that are in the correct spaces, generating only randoms letters for the remaining spaces. This increases the likelihood of success each time.
-# Chase Tramel aka Kasey Chase Littlepaws - https://github.com/ChaseLittlepaws
+# Chase Tramel aka Kasey Chase Littlepaws - https://github.com/ChaseTramel
 
 import string
 import random
