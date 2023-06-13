@@ -215,12 +215,12 @@ def displayBooks():
     books = library.books
     return render_template("books.html", books=books)
 
-@app.route("/check_out")
+@app.route("/checkout")
 def displayCheckOutForm():
-    return render_template("check_out.html")
+    return render_template("checkout.html")
 
-@app.route("/check_out", methods=["GET", "POST"])
-def checkout():
+@app.route("/checkout/<bookID>", methods=["GET", "POST"])
+def checkout(bookID):
     if request.method == "POST":
         bookID = request.form.get("bookID")
         book = library.getBook(bookID)
@@ -237,7 +237,7 @@ def checkout():
             flash("Book not found.")
             return redirect("/")
     else:
-        return render_template("check_out.html")
+        return render_template("checkout.html", bookID=bookID)
     
 @app.route("/return")
 def displayReturn():
@@ -260,7 +260,7 @@ def processReturn():
             flash("Book not found.")
             return redirect("/")
     else:
-        return render_template("check_out.html")
+        return render_template("checkout.html")
 
 if __name__ == "__main__":
     app.run()

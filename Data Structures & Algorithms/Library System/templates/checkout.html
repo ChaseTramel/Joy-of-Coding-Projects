@@ -1,4 +1,4 @@
-<!-- templates/check_out.html -->
+<!-- templates/checkout.html -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,9 +19,9 @@
         Click the checkout button.<br>
         Receive confirmation of successful checkout. Happy reading!
         </p>
-        <form action="{{ check_out }}" method="POST">
+        <form action="{{ checkout }}" method="POST">
             <label for="bookID">Book ID Number</label>
-            <input type="text" id="bookID" name="bookID"><br>
+            <input type="text" id="bookID" name="bookID" value="{{ bookID }}"><br>
             <label for="IDNumber">Your Library Number</label>
             <input type="text" id="IDNumber" name="IDNumber"><br>
             <input type="submit" value="Check Out">

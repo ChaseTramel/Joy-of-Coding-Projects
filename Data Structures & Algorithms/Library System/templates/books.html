@@ -19,7 +19,7 @@
                     {% if book.dueDate %}
                         Currently checked out. Due on {{ book.dueDate }}
                     {% else %}
-                        You can check out this book using the Book #{{ book.bookID }}
+                        You can check out this book using the book <a href="{{ url_for('checkout', bookID=book.bookID) }}">here!</a>
                     {% endif %}
                 </li>
             {% endfor %}
