@@ -19,9 +19,9 @@
         {
             "author": "Orson Scott Card",
             "bookID": "78835943",
-            "dueDate": "2023-06-21",
+            "dueDate": null,
             "publishedYear": "1985",
-            "rentingPatron": "Chase Tramel",
+            "rentingPatron": null,
             "title": "Ender's Game"
         }
     ],
