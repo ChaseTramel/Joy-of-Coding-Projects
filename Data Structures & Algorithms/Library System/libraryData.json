@@ -4,7 +4,7 @@
             "title": "Frankenstein",
             "publishedYear": "1818",
             "author": "Mary Shelley",
-            "dueDate": "2023-06-21",
+            "dueDate": "2023-03-21",
             "rentingPatron": "Chase Tramel",
             "bookID": "55772265"
         },
@@ -12,7 +12,7 @@
             "title": "Speaker for the Dead",
             "publishedYear": "1989",
             "author": "Orson Scott Card",
-            "dueDate": "2023-06-28",
+            "dueDate": "2023-04-28",
             "rentingPatron": "Chase Tramel",
             "bookID": "86887492"
         },
@@ -20,7 +20,7 @@
             "title": "Ender's Game",
             "publishedYear": "1985",
             "author": "Orson Scott Card",
-            "dueDate": "2023-06-28",
+            "dueDate": "2023-06-20",
             "rentingPatron": "Chase Tramel",
             "bookID": "78835943"
         },

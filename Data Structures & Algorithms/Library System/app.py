@@ -1,7 +1,7 @@
 # A Python program to simulate a library system
 # K Chase Tramel - https://github.com/ChaseTramel
 
-import datetime
+from datetime import date, datetime
 import random
 import string
 import json
@@ -37,6 +37,8 @@ class Library:
                         if patron.IDNumber == patron_id:
                             book.rentingPatron = patron.name
                             break
+                    loadedDateString = book.__dict__["dueDate"]
+                    book.dueDate = datetime.strptime(loadedDateString, "%Y-%m-%d").date()
             print("Library data loaded successfully!")
         except FileNotFoundError:
             print("Library data not found. A new library file was made.")
@@ -158,9 +160,10 @@ class Book:
             print(f"{self.title} can't be returned because it isn't checked out!")
         library.saveData()
     def calculateFine(self):
-        if self.dueDate is not None and self.dueDate < datetime.date.today():
-            daysLate =(datetime.date.today() - self.dueDate).days
-            self.fine = daysLate * .25 # Late fee of  25 cents per day
+        today = datetime.date.today()
+        if self.dueDate is not None and self.dueDate < today:
+            daysLate =(today - self.dueDate).days
+            self.fine = daysLate * 0.25 # Late fee of  25 cents per day
         else:
             self.fine = 0
         library.saveData()
