@@ -19,7 +19,7 @@
         Click the checkout button.<br>
         Receive confirmation of successful checkout. Happy reading!
         </p>
-        <form action="{{ checkout }}" method="POST">
+        <form action="{{ checkout }}" method=["GET", "POST"]>
             <label for="bookID">Book ID Number</label>
             <input type="text" id="bookID" name="bookID" value="{{ bookID }}" required><br>
             <label for="IDNumber">Your Library Number</label>
