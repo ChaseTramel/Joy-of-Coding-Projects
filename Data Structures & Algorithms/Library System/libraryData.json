@@ -1,36 +1,72 @@
 {
     "books": [
         {
-            "author": "Mary Shelley",
-            "bookID": "55772265",
-            "dueDate": "2023-06-21",
+            "title": "Frankenstein",
             "publishedYear": "1818",
+            "author": "Mary Shelley",
+            "dueDate": "2023-06-21",
             "rentingPatron": "Chase Tramel",
-            "title": "Frankenstein"
+            "bookID": "55772265"
         },
         {
-            "author": "Orson Scott Card",
-            "bookID": "86887492",
-            "dueDate": "2023-06-27",
+            "title": "Speaker for the Dead",
             "publishedYear": "1989",
+            "author": "Orson Scott Card",
+            "dueDate": "2023-06-28",
             "rentingPatron": "Chase Tramel",
-            "title": "Speaker for the Dead"
+            "bookID": "86887492"
         },
         {
-            "author": "Orson Scott Card",
-            "bookID": "78835943",
-            "dueDate": null,
+            "title": "Ender's Game",
             "publishedYear": "1985",
+            "author": "Orson Scott Card",
+            "dueDate": "2023-06-28",
+            "rentingPatron": "Chase Tramel",
+            "bookID": "78835943"
+        },
+        {
+            "title": "The Lord of the Rings: The Fellowship of the Ring",
+            "publishedYear": "1954",
+            "author": "J.R.R. Tolkien",
+            "dueDate": null,
             "rentingPatron": null,
-            "title": "Ender's Game"
+            "bookID": "95273628"
+        },
+        {
+            "title": "1984",
+            "publishedYear": "1949",
+            "author": "George Orwell",
+            "dueDate": null,
+            "rentingPatron": null,
+            "bookID": "36289573"
+        },
+        {
+            "title": "To Kill a Mockingbird",
+            "publishedYear": "1960",
+            "author": "Harper Lee",
+            "dueDate": null,
+            "rentingPatron": null,
+            "bookID": "73502945"
         }
     ],
     "patrons": [
         {
-            "IDNumber": "582053",
+            "name": "Chase Tramel",
             "birthday": "3-13-1994",
             "fine": 0,
-            "name": "Chase Tramel"
+            "IDNumber": "582053"
+        },
+        {
+            "name": "Emily Johnson",
+            "birthday": "7-21-1988",
+            "fine": 10,
+            "IDNumber": "293481"
+        },
+        {
+            "name": "Alex Rodriguez",
+            "birthday": "11-5-1976",
+            "fine": 5,
+            "IDNumber": "835192"
         }
     ]
 }

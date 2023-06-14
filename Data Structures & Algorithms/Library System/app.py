@@ -19,12 +19,12 @@ class Library:
             'books':[book.__dict__ for book in self.books],
             'patrons':[patron.__dict__ for patron in self.patrons]
         }
-        filepath = "Data Structures & Algorithms\Library System\libraryData.json"
+        filepath = "Library System\libraryData.json"
         with open(filepath, "w") as file:
             json.dump(data, file, indent=4, default=str)
         print("Library data backed up successfully!")
     def loadData(self):
-        filepath = "Data Structures & Algorithms\Library System\libraryData.json"
+        filepath = "Library System\libraryData.json"
         try:
             with open(filepath, "r") as file:
                 data = json.load(file)
@@ -151,7 +151,7 @@ class Book:
             print(f"Sorry, {patron.name}, {self.title} is checked out. It should be returned on or before {self.dueDate}.")
     def returnBook(self):
         if self.dueDate is not None:
-            # self.calculateFine()
+            self.calculateFine()
             self.rentingPatron = None
             self.dueDate = None
         else:
@@ -222,10 +222,13 @@ def displayCheckOutForm():
 @app.route("/checkout/<bookID>", methods=["GET", "POST"])
 def checkout(bookID):
     if request.method == "POST":
-        bookID = request.form.get("bookID")
         book = library.getBook(bookID)
-        IDNumber = request.form.get('IDNumber')
-        if book:
+        IDNumber = request.form.get("IDNumber")
+        patron = library.getPatron(IDNumber)
+        if book and patron:
+            if patron.fine > 0: 
+                flash("Sorry, you can't check out because you have a fine.")
+                return redirect("/")
             if book.dueDate:
                 flash("Sorry, that book is already checked out.")
                 return redirect("/")
@@ -234,7 +237,7 @@ def checkout(bookID):
                 flash("You successfully checked out a book!")
                 return redirect("/")
         else:
-            flash("Book not found.")
+            flash("Book or patron not found.")
             return redirect("/")
     else:
         return render_template("checkout.html", bookID=bookID)

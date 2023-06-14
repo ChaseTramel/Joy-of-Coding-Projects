@@ -21,9 +21,9 @@
         </p>
         <form action="{{ checkout }}" method="POST">
             <label for="bookID">Book ID Number</label>
-            <input type="text" id="bookID" name="bookID" value="{{ bookID }}"><br>
+            <input type="text" id="bookID" name="bookID" value="{{ bookID }}" required><br>
             <label for="IDNumber">Your Library Number</label>
-            <input type="text" id="IDNumber" name="IDNumber"><br>
+            <input type="text" id="IDNumber" name="IDNumber" required><br>
             <input type="submit" value="Check Out">
         </form>
     </div>  
